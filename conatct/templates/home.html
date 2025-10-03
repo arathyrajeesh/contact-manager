@@ -6,11 +6,6 @@
 <title>Contact Manager</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
-/* ======================================
-    🎨 ATTRACTIVE STYLE REVISIONS 🎨
-    (Fixes applied for padding and icon centering)
-    ======================================
-*/
 
 :root {
     --primary-blue: #007bff; 
@@ -27,13 +22,10 @@ body {
     padding: 0;
 }
 
-/* ----------------- Header (FIXED PADDING) ----------------- */
 header {
     position: relative;
     background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
     color: white;
-    /* FIX: Corrected the missing 'p' and semicolon. 
-       We're aiming for Logout on Left (100px space) and Icon on Right (50px space for just the icon). */
     padding: 20px 50px 20px 100px; 
     text-align: center;
     font-size: 28px;
@@ -41,13 +33,10 @@ header {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
-/* Profile Icon (NOW ON THE RIGHT) */
 .profile-icon {
     position: absolute;
-    /* FIX: Use 50% for top to ensure perfect vertical centering */
     top: 50%;
     transform: translateY(-50%); 
-    /* CHANGED POSITION: Moved from right: 30px to right: 20px for symmetry with left element */
     right: 20px; 
     cursor: pointer;
     z-index: 10;
@@ -64,20 +53,18 @@ header {
     color: #5BC0DE;
 }
 
-/* Logout Button (NOW ON THE LEFT) */
 .logout-button {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    /* CHANGED POSITION: Moved from left: 50px to left: 20px for better alignment */
     left: 20px;
     z-index: 10;
     background: #FF5E5E;
     color: white;
-    padding: 8px 16px; /* Slightly adjusted padding for button-like appearance */
+    padding: 8px 16px; 
     border-radius: 8px;
     text-decoration: none;
-    font-size: 14px; /* Adjusted size to be visually lighter */
+    font-size: 14px; 
     font-weight: 500;
     transition: var(--hover-transition);
 }
@@ -86,7 +73,6 @@ header {
     box-shadow: 0 0 15px rgba(255, 94, 94, 0.5);
 }
 
-/* ----------------- Container & Buttons ----------------- */
 .container {
     width: 90%;
     max-width: 900px;
@@ -115,7 +101,6 @@ a.button:hover {
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* ----------------- Table ----------------- */
 table {
     width: 100%;
     border-collapse: separate;
@@ -157,7 +142,6 @@ td {
     font-size: 15px;
 }
 
-/* ----------------- Action Buttons ----------------- */
 .action-btn {
     padding: 8px 14px;
     border-radius: 5px;
@@ -187,7 +171,6 @@ td {
     background: #E54545;
 }
 
-/* ----------------- Responsive ----------------- */
 @media screen and (max-width: 600px) {
     header {
         font-size: 20px;
