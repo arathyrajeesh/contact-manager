@@ -6,16 +6,14 @@
 <title>User Profile</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
-    /* --- Modernized Colors & Variables --- */
     :root {
-        --primary-blue: #007bff; /* Richer blue */
-        --light-bg: #EAEFF4; /* Cooler background */
-        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft shadow */
-        --accent-green: #00BFA5; /* Green for active/user elements */
-        --accent-red: #FF5E5E; /* Red for admin/alert elements */
+        --primary-blue: #007bff; 
+        --light-bg: #EAEFF4;
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+        --accent-green: #00BFA5;
+        --accent-red: #FF5E5E; 
     }
 
-    /* --- Page Layout --- */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: var(--light-bg);
@@ -24,13 +22,12 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 100vh; /* Use min-height for responsiveness */
+        min-height: 100vh; 
     }
 
-    /* --- Profile Card --- */
     .profile-container {
         background: white;
-        padding: 40px; /* Increased padding */
+        padding: 40px;
         border-radius: 12px;
         box-shadow: var(--card-shadow);
         width: 100%;
@@ -39,10 +36,9 @@
         transition: transform 0.3s ease-in-out;
     }
     .profile-container:hover {
-        transform: translateY(-3px); /* Subtle lift on hover */
+        transform: translateY(-3px);
     }
 
-    /* --- Profile Picture/Icon --- */
     .profile-avatar {
         width: 100px;
         height: 100px;
@@ -53,8 +49,8 @@
         border-radius: 50%;
         font-size: 40px;
         text-align: center;
-        border: 4px solid #fff; /* White border for contrast */
-        box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.3); /* Blue ring effect */
+        border: 4px solid #fff; 
+        box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.3); 
     }
 
     h2 {
@@ -64,7 +60,6 @@
         letter-spacing: 0.5px;
     }
 
-    /* --- Detail Lines --- */
     .detail-line {
         display: flex;
         justify-content: space-between;
@@ -90,7 +85,6 @@
         flex: 2;
     }
 
-    /* --- Status Badges --- */
     .status-badge {
         padding: 4px 8px;
         border-radius: 5px;
@@ -112,7 +106,6 @@
         color: white;
     }
     
-    /* --- Action Button --- */
     a.button {
         display: inline-block;
         margin-top: 30px;
@@ -125,7 +118,7 @@
         transition: all 0.2s ease-in-out;
     }
     a.button:hover {
-        background: var(--dark-blue);
+        background-color:red;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 </style>

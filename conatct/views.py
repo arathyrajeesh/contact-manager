@@ -6,14 +6,14 @@ from django.contrib.auth.decorators import login_required
 from .forms import ContactForm
 from .models import Contact
 from .forms import CustomUserChangeForm
-# --- View to display user profile ---
+
+
 @login_required
 def profile_view(request):
     user = request.user
     return render(request, 'profile.html', {'user': user})
 
 
-# --- View to edit profile ---
 @login_required
 def edit_profile(request):
     user = request.user
@@ -22,7 +22,7 @@ def edit_profile(request):
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully!")
-            return redirect('profile')  # Redirect to profile page
+            return redirect('profile')  
     else:
         form = CustomUserChangeForm(instance=user)
     
