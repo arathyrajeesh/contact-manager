@@ -133,3 +133,9 @@ def admin_delete(request, pk):
         contact.delete()
         return redirect('admin_dashboard')
     return render(request, 'contact_delete.html', {'contact': contact})
+
+
+@login_required
+def profile_view(request):
+    user = request.user
+    return render(request, 'profile.html', {'user': user})

@@ -4,80 +4,225 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Manager</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #f5f7fa;
-        margin: 0;
-        padding: 0;
-    }
+/* ======================================
+    🎨 ATTRACTIVE STYLE REVISIONS 🎨
+    (Fixes applied for padding and icon centering)
+    ======================================
+*/
+
+:root {
+    --primary-blue: #007bff; 
+    --dark-blue: #0056b3;
+    --light-bg: #EAEFF4; 
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    --hover-transition: all 0.3s ease-in-out;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--light-bg);
+    margin: 0;
+    padding: 0;
+}
+
+/* ----------------- Header (FIXED PADDING) ----------------- */
+header {
+    position: relative;
+    background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
+    color: white;
+    /* FIX: Corrected the missing 'p' and semicolon. 
+       We're aiming for Logout on Left (100px space) and Icon on Right (50px space for just the icon). */
+    padding: 20px 50px 20px 100px; 
+    text-align: center;
+    font-size: 28px;
+    font-weight: 600;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Profile Icon (NOW ON THE RIGHT) */
+.profile-icon {
+    position: absolute;
+    /* FIX: Use 50% for top to ensure perfect vertical centering */
+    top: 50%;
+    transform: translateY(-50%); 
+    /* CHANGED POSITION: Moved from right: 30px to right: 20px for symmetry with left element */
+    right: 20px; 
+    cursor: pointer;
+    z-index: 10;
+    transition: var(--hover-transition);
+}
+.profile-icon:hover {
+    transform: translateY(-50%) scale(1.1);
+}
+.profile-icon i {
+    font-size: 28px;
+    color: white;
+}
+.profile-icon:hover i {
+    color: #5BC0DE;
+}
+
+/* Logout Button (NOW ON THE LEFT) */
+.logout-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* CHANGED POSITION: Moved from left: 50px to left: 20px for better alignment */
+    left: 20px;
+    z-index: 10;
+    background: #FF5E5E;
+    color: white;
+    padding: 8px 16px; /* Slightly adjusted padding for button-like appearance */
+    border-radius: 8px;
+    text-decoration: none;
+    font-size: 14px; /* Adjusted size to be visually lighter */
+    font-weight: 500;
+    transition: var(--hover-transition);
+}
+.logout-button:hover {
+    background: #E54545;
+    box-shadow: 0 0 15px rgba(255, 94, 94, 0.5);
+}
+
+/* ----------------- Container & Buttons ----------------- */
+.container {
+    width: 90%;
+    max-width: 900px;
+    margin: 40px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+}
+
+a.button {
+    display: inline-block;
+    background: var(--primary-blue);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-weight: 500;
+    transition: var(--hover-transition);
+}
+a.button:hover {
+    background: var(--dark-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* ----------------- Table ----------------- */
+table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 8px;
+}
+
+thead th {
+    background: #EAF2F8;
+    color: var(--dark-blue);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    border-bottom: none;
+    padding: 15px 12px;
+}
+thead tr th:first-child {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+thead tr th:last-child {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+tbody tr {
+    background: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    transition: var(--hover-transition);
+}
+tbody tr:hover {
+    background: #F8F9FA;
+    transform: translateY(-1px);
+}
+
+td {
+    padding: 15px 12px;
+    border-bottom: none;
+    font-size: 15px;
+}
+
+/* ----------------- Action Buttons ----------------- */
+.action-btn {
+    padding: 8px 14px;
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    font-size: 13px;
+    margin-right: 8px;
+    font-weight: 500;
+    transition: var(--hover-transition);
+}
+.action-btn:hover {
+    opacity: 0.9;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.edit-btn {
+    background: #00BFA5;
+}
+.edit-btn:hover {
+    background: #00A38D;
+}
+
+.delete-btn {
+    background: #FF5E5E;
+}
+.delete-btn:hover {
+    background: #E54545;
+}
+
+/* ----------------- Responsive ----------------- */
+@media screen and (max-width: 600px) {
     header {
-        background: #4a90e2;
-        color: white;
-        padding: 20px;
-        text-align: center;
-        font-size: 24px;
-        font-weight: bold;
-        position: relative;
+        font-size: 20px;
+        padding: 15px;
     }
-    .logout-button {
-        position: absolute;
-        right: 20px;
-        top: 20px;
-        background: #d9534f;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 6px;
-        text-decoration: none;
-        font-size: 14px;
-    }
-    .logout-button:hover {
-        background: #c9302c;
+    .profile-icon, .logout-button {
+        position: static;
+        transform: none;
+        display: inline-block;
+        margin: 5px 10px;
     }
     .container {
-        width: 90%;
-        max-width: 800px;
-        margin: 30px auto;
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        width: 95%;
+        padding: 15px;
     }
-    table {
-        width: 100%;
-        border-collapse: collapse;
+    table, th, td {
+        font-size: 12px;
     }
-    th, td {
-        padding: 12px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-    th {
-        background: #f0f0f0;
-    }
-    a.button {
-        display: inline-block;
-        background: #4a90e2;
-        color: white;
-        padding: 8px 16px;
-        border-radius: 6px;
-        text-decoration: none;
-        margin-right: 5px;
-        font-size: 14px;
-    }
-    a.button:hover {
-        background: #357ABD;
-    }
+}
 </style>
 </head>
 <body>
-<header>
-    Contact Manager
-    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
-</header>
-
+    <header>
+        Contact Manager
+    
+        <a href="{% url 'profile' %}" class="profile-icon" title="View Profile">
+            <i class="fa-solid fa-user"></i> 
+        </a>
+    
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </header>
+    
+    
 <div class="container">
-    <a href="{% url 'add_contact' %}" class="button">+ Add New Contact</a>
+    <a href="{% url 'add_contact' %}" class="button"><i class="fa-solid fa-plus"></i> Add New Contact</a>
     <table>
         <thead>
             <tr>
@@ -94,13 +239,15 @@
                 <td>{{ contact.email }}</td>
                 <td>{{ contact.phone }}</td>
                 <td>
-                    <a href="{% url 'edit_contact' contact.id %}" class="button" style="background:#f0ad4e;">Edit</a>
-                    <a href="{% url 'delete_contact' contact.id %}" class="button" style="background:#d9534f;">Delete</a>
+                    <a href="{% url 'edit_contact' contact.id %}" class="action-btn edit-btn">Edit</a>
+                    <a href="{% url 'delete_contact' contact.id %}" class="action-btn delete-btn">Delete</a>
                 </td>
             </tr>
             {% empty %}
             <tr>
-                <td colspan="4" style="text-align:center;">No contacts found.</td>
+                <td colspan="4" style="text-align:center; padding: 20px;">
+                    <i class="fa-solid fa-inbox"></i> No contacts found.
+                </td>
             </tr>
             {% endfor %}
         </tbody>
