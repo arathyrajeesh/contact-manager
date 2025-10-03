@@ -4,56 +4,185 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>User Profile</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
+    /* --- Modernized Colors & Variables --- */
+    :root {
+        --primary-blue: #007bff; /* Richer blue */
+        --light-bg: #EAEFF4; /* Cooler background */
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); /* Soft shadow */
+        --accent-green: #00BFA5; /* Green for active/user elements */
+        --accent-red: #FF5E5E; /* Red for admin/alert elements */
+    }
+
+    /* --- Page Layout --- */
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #f5f7fa;
+        background: var(--light-bg);
         margin: 0;
         padding: 0;
         display: flex;
         justify-content: center;
         align-items: center;
-        height: 100vh;
+        min-height: 100vh; /* Use min-height for responsiveness */
     }
+
+    /* --- Profile Card --- */
     .profile-container {
         background: white;
-        padding: 30px 40px;
-        border-radius: 10px;
-        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        padding: 40px; /* Increased padding */
+        border-radius: 12px;
+        box-shadow: var(--card-shadow);
         width: 100%;
         max-width: 400px;
         text-align: center;
+        transition: transform 0.3s ease-in-out;
     }
+    .profile-container:hover {
+        transform: translateY(-3px); /* Subtle lift on hover */
+    }
+
+    /* --- Profile Picture/Icon --- */
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+        line-height: 100px;
+        margin: 0 auto 25px;
+        background: var(--primary-blue);
+        color: white;
+        border-radius: 50%;
+        font-size: 40px;
+        text-align: center;
+        border: 4px solid #fff; /* White border for contrast */
+        box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.3); /* Blue ring effect */
+    }
+
     h2 {
-        margin-bottom: 20px;
-        color: #4a90e2;
+        margin-bottom: 30px;
+        color: var(--dark-blue);
+        font-weight: 600;
+        letter-spacing: 0.5px;
     }
-    p {
+
+    /* --- Detail Lines --- */
+    .detail-line {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+        border-bottom: 1px solid #eee;
         font-size: 16px;
-        margin: 10px 0;
-        color: #333;
     }
+    .detail-line:last-child {
+        border-bottom: none;
+    }
+
+    .detail-label {
+        font-weight: 600;
+        color: #555;
+        text-align: left;
+        flex: 1;
+    }
+
+    .detail-value {
+        color: #333;
+        text-align: right;
+        flex: 2;
+    }
+
+    /* --- Status Badges --- */
+    .status-badge {
+        padding: 4px 8px;
+        border-radius: 5px;
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    .badge-admin {
+        background: var(--accent-red);
+        color: white;
+    }
+    .badge-user {
+        background: var(--accent-green);
+        color: white;
+    }
+    .badge-active {
+        background: #F0AD4E;
+        color: white;
+    }
+    
+    /* --- Action Button --- */
     a.button {
         display: inline-block;
-        margin-top: 20px;
-        padding: 10px 20px;
-        background: #4a90e2;
+        margin-top: 30px;
+        padding: 10px 25px;
+        background: var(--primary-blue);
         color: white;
-        border-radius: 6px;
+        border-radius: 8px;
         text-decoration: none;
+        font-weight: 500;
+        transition: all 0.2s ease-in-out;
     }
     a.button:hover {
-        background: #357ABD;
+        background: var(--dark-blue);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     }
 </style>
 </head>
 <body>
 <div class="profile-container">
-    <h2>User Profile</h2>
-    <p><strong>Username:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
-    <p><strong>Role:</strong> {% if user.is_superuser %}Admin{% else %}User{% endif %}</p>
-    <a href="{% url 'contact_list' %}" class="button">Back to Dashboard</a>
+    
+    <div class="profile-avatar" title="User Avatar">
+        <i class="fa-solid fa-user"></i>
+    </div>
+    
+    <h2>Account Details</h2>
+    
+    <div class="detail-line">
+        <span class="detail-label"><i class="fa-solid fa-id-card"></i> Username:</span>
+        <span class="detail-value">{{ user.username }}</span>
+    </div>
+    
+    <div class="detail-line">
+        <span class="detail-label"><i class="fa-solid fa-user-tag"></i> First Name:</span>
+        <span class="detail-value">{% if user.first_name %}{{ user.first_name }}{% else %}N/A{% endif %}</span> 
+    </div>
+
+    <div class="detail-line">
+        <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email:</span>
+        <span class="detail-value">{{ user.email }}</span>
+    </div>
+    
+    <div class="detail-line">
+        <span class="detail-label"><i class="fa-solid fa-calendar-alt"></i> Joined:</span>
+        <span class="detail-value">{% if user.date_joined %}{{ user.date_joined|date:"M d, Y" }}{% else %}N/A{% endif %}</span> 
+    </div>
+
+    <div class="detail-line">
+        <span class="detail-label"><i class="fa-solid fa-power-off"></i> Status:</span>
+        <span class="detail-value">
+            {% if user.is_active %}
+            <span class="status-badge badge-active">Active</span>
+            {% else %}
+            <span class="status-badge" style="background:#6c757d;">Inactive</span>
+            {% endif %}
+        </span>
+    </div>
+    
+    <div class="detail-line">
+        <span class="detail-label"><i class="fa-solid fa-users-gear"></i> Role:</span>
+        <span class="detail-value">
+            {% if user.is_superuser %}
+            <span class="status-badge badge-admin">Administrator</span>
+            {% else %}
+            <span class="status-badge badge-user">Standard User</span>
+            {% endif %}
+        </span>
+    </div>
+
+    <a href="{% url 'contact_list' %}" class="button">Back to Contacts</a>
+    <a href="{% url 'edit_profile' %}" class="button" style="background:#5bc0de; margin-left: 10px;">Edit Profile</a>
 </div>
 </body>
 </html>

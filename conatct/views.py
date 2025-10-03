@@ -5,7 +5,28 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import ContactForm
 from .models import Contact
+from .forms import CustomUserChangeForm
+# --- View to display user profile ---
+@login_required
+def profile_view(request):
+    user = request.user
+    return render(request, 'profile.html', {'user': user})
 
+
+# --- View to edit profile ---
+@login_required
+def edit_profile(request):
+    user = request.user
+    if request.method == 'POST':
+        form = CustomUserChangeForm(request.POST, instance=user)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Profile updated successfully!")
+            return redirect('profile')  # Redirect to profile page
+    else:
+        form = CustomUserChangeForm(instance=user)
+    
+    return render(request, 'edit_profile.html', {'form': form, 'user': user})
 
 def register_view(request):
     if request.method == "POST":
@@ -53,8 +74,6 @@ def login_view(request):
 def logout_view(request):
     logout(request)
     return redirect('login')
-
-
 
 
 @login_required
