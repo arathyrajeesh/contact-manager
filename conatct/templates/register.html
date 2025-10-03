@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% block title %}Register / Login{% endblock %}</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+
+    .auth-container {
+        background: white;
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    h2 {
+        margin-bottom: 20px;
+        color: #4a90e2;
+    }
+
+    input[type="text"], input[type="email"], input[type="password"] {
+        width: 100%;
+        padding: 12px 15px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        font-size: 16px;
+    }
+
+    button {
+        width: 100%;
+        padding: 12px;
+        margin-top: 15px;
+        background: #4a90e2;
+        border: none;
+        border-radius: 6px;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #357ABD;
+    }
+
+    .auth-footer {
+        margin-top: 15px;
+        font-size: 14px;
+    }
+
+    .auth-footer a {
+        color: #4a90e2;
+        text-decoration: none;
+    }
+
+    .auth-footer a:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<div class="auth-container">
+    <h2>{% block heading %}Register{% endblock %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password1" placeholder="Password" required>
+        <input type="password" name="password2" placeholder="Confirm Password" required>
+        <button type="submit">{% block button_text %}Register{% endblock %}</button>
+    </form>
+    <div class="auth-footer">
+        <a href="{% url 'login' %}">Already have an account? Login</a>
+    </div>
+</div>
+</body>
+</html>

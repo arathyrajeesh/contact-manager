@@ -18,6 +18,21 @@
         text-align: center;
         font-size: 24px;
         font-weight: bold;
+        position: relative;
+    }
+    .logout-button {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+        background: #d9534f;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 14px;
+    }
+    .logout-button:hover {
+        background: #c9302c;
     }
     .container {
         width: 90%;
@@ -56,7 +71,10 @@
 </style>
 </head>
 <body>
-<header>Contact Manager</header>
+<header>
+    Contact Manager
+    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+</header>
 
 <div class="container">
     <a href="{% url 'add_contact' %}" class="button">+ Add New Contact</a>
