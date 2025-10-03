@@ -1,1 +1,92 @@
-hellooooo
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Manager</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background: #4a90e2;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 30px auto;
+        background: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    th, td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid #ddd;
+    }
+    th {
+        background: #f0f0f0;
+    }
+    a.button {
+        display: inline-block;
+        background: #4a90e2;
+        color: white;
+        padding: 8px 16px;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-right: 5px;
+        font-size: 14px;
+    }
+    a.button:hover {
+        background: #357ABD;
+    }
+</style>
+</head>
+<body>
+<header>Contact Manager</header>
+
+<div class="container">
+    <a href="{% url 'add_contact' %}" class="button">+ Add New Contact</a>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contact in contacts %}
+            <tr>
+                <td>{{ contact.name }}</td>
+                <td>{{ contact.email }}</td>
+                <td>{{ contact.phone }}</td>
+                <td>
+                    <a href="{% url 'edit_contact' contact.id %}" class="button" style="background:#f0ad4e;">Edit</a>
+                    <a href="{% url 'delete_contact' contact.id %}" class="button" style="background:#d9534f;">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="4" style="text-align:center;">No contacts found.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if form.instance.pk %}Edit Contact{% else %}Add Contact{% endif %}</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background: #4a90e2;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .container {
+        width: 90%;
+        max-width: 500px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    }
+    form label {
+        display: block;
+        margin-bottom: 6px;
+        font-weight: bold;
+    }
+    form input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border: 1px solid #ccc;
+        font-size: 14px;
+    }
+    button {
+        background: #4a90e2;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #357ABD;
+    }
+    a.back {
+        display: inline-block;
+        margin-top: 10px;
+        text-decoration: none;
+        color: #4a90e2;
+        font-size: 14px;
+    }
+    a.back:hover {
+        text-decoration: underline;
+    }
+</style>
+</head>
+<body>
+<header>{% if form.instance.pk %}Edit Contact{% else %}Add Contact{% endif %}</header>
+
+<div class="container">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'contact_list' %}" class="back">← Back to Contacts</a>
+</div>
+</body>
+</html>
