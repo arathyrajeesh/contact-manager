@@ -63,10 +63,6 @@
         background: #007bff;
         color: white;
     }
-    .sidebar a.active {
-        background: #1f78c9;
-        color: white;
-    }
 
     .content {
         flex: 1;
@@ -98,7 +94,7 @@
         <div class="sidebar">
             <a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a>
             <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
-            <a href="{% url 'admin_settings' %}" ><i class="fa-solid fa-gear"></i> Settings</a>
+            <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-gear"></i> Settings</a>
             <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
         </div>
 

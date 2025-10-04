@@ -18,5 +18,6 @@ urlpatterns = [
     path('profile/', views.profile_view, name='profile'),
     path('profile/edit/', views.edit_profile, name='edit_profile'),
     path('adminprofile/', views.admin_profile_view, name='admin_profile'),
-
+    path('adminsetings/', views.admin_settings, name='admin_settings'),
+    path('manageuser/', views.manage_user, name='manager_user'),
 ]

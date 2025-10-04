@@ -165,4 +165,11 @@ def admin_profile_view(request):
     user = request.user
     return render(request, 'admin_profile.html', {'user': user})
 
+@login_required
+def admin_settings(request):
+    return render(request, 'admin_settings.html')
 
+
+@login_required
+def manage_user(request):
+    return render(request, 'manage user.html')

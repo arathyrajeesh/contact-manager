@@ -3,179 +3,286 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>User Profile</title>
+<title>Admin Settings</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
-    :root {
-        --primary-blue: #007bff; 
-        --light-bg: #EAEFF4;
-        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
-        --accent-green: #00BFA5;
-        --accent-red: #FF5E5E; 
+:root {
+    --primary-blue: #007bff; 
+    --dark-blue: #0056b3;
+    --light-bg: #EAEFF4;
+    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+    --accent-green: #00BFA5;
+    --accent-red: #FF5E5E; 
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: var(--light-bg);
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar h1 {
+    font-size: 22px;
+    margin: 0;
+}
+
+.navbar .logout {
+    background: var(--accent-red);
+    padding: 8px 14px;
+    border-radius: 6px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+    transition: 0.3s;
+}
+
+.navbar .logout:hover {
+    background: #d9534f;
+}
+
+/* Layout */
+.layout {
+    display: flex;
+    min-height: calc(100vh - 60px); /* subtract navbar height */
+}
+
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    background: #fff;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+    padding-top: 20px;
+}
+
+.sidebar a {
+    display: block;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.sidebar a:hover {
+    background: var(--primary-blue);
+    color: white;
+}
+
+.sidebar a.active {
+    background: #1f78c9;
+    color: white;
+}
+
+/* Content */
+.content {
+    flex: 1;
+    padding: 25px;
+}
+
+/* Profile Card */
+.profile-container {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    max-width: 600px;
+    margin: 0 auto;
+    transition: transform 0.3s ease-in-out;
+}
+
+.profile-container:hover {
+    transform: translateY(-3px);
+}
+
+.profile-avatar {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    margin: 0 auto 25px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 50%;
+    font-size: 40px;
+    text-align: center;
+    border: 4px solid #fff; 
+    box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.3); 
+}
+
+h2 {
+    margin-bottom: 30px;
+    color: var(--dark-blue);
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.detail-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 16px;
+}
+
+.detail-line:last-child {
+    border-bottom: none;
+}
+
+.detail-label {
+    font-weight: 600;
+    color: #555;
+    text-align: left;
+    flex: 1;
+}
+
+.detail-value {
+    color: #333;
+    text-align: right;
+    flex: 2;
+}
+
+.status-badge {
+    padding: 4px 8px;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.badge-admin {
+    background: var(--accent-red);
+    color: white;
+}
+
+.badge-user {
+    background: var(--accent-green);
+    color: white;
+}
+
+.badge-active {
+    background: #F0AD4E;
+    color: white;
+}
+
+a.button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 10px 25px;
+    background: var(--primary-blue);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+a.button:hover {
+    background-color: red;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .layout {
+        flex-direction: column;
     }
 
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: var(--light-bg);
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 100vh; 
-    }
-
-    .profile-container {
-        background: white;
-        padding: 40px;
-        border-radius: 12px;
-        box-shadow: var(--card-shadow);
+    .sidebar {
         width: 100%;
-        max-width: 400px;
-        text-align: center;
-        transition: transform 0.3s ease-in-out;
-    }
-    .profile-container:hover {
-        transform: translateY(-3px);
-    }
-
-    .profile-avatar {
-        width: 100px;
-        height: 100px;
-        line-height: 100px;
-        margin: 0 auto 25px;
-        background: var(--primary-blue);
-        color: white;
-        border-radius: 50%;
-        font-size: 40px;
-        text-align: center;
-        border: 4px solid #fff; 
-        box-shadow: 0 0 0 5px rgba(0, 123, 255, 0.3); 
-    }
-
-    h2 {
-        margin-bottom: 30px;
-        color: var(--dark-blue);
-        font-weight: 600;
-        letter-spacing: 0.5px;
-    }
-
-    .detail-line {
         display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 12px 0;
-        border-bottom: 1px solid #eee;
-        font-size: 16px;
-    }
-    .detail-line:last-child {
-        border-bottom: none;
+        overflow-x: auto;
     }
 
-    .detail-label {
-        font-weight: 600;
-        color: #555;
-        text-align: left;
+    .sidebar a {
         flex: 1;
+        text-align: center;
     }
-
-    .detail-value {
-        color: #333;
-        text-align: right;
-        flex: 2;
-    }
-
-    .status-badge {
-        padding: 4px 8px;
-        border-radius: 5px;
-        font-size: 13px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-    }
-    .badge-admin {
-        background: var(--accent-red);
-        color: white;
-    }
-    .badge-user {
-        background: var(--accent-green);
-        color: white;
-    }
-    .badge-active {
-        background: #F0AD4E;
-        color: white;
-    }
-    
-    a.button {
-        display: inline-block;
-        margin-top: 30px;
-        padding: 10px 25px;
-        background: var(--primary-blue);
-        color: white;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: 500;
-        transition: all 0.2s ease-in-out;
-    }
-    a.button:hover {
-        background-color:red;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    }
+}
 </style>
 </head>
 <body>
-<div class="profile-container">
-    
-    <div class="profile-avatar" title="User Avatar">
-        <i class="fa-solid fa-user"></i>
-    </div>
-    
-    <h2>Account Details</h2>
-    
-    <div class="detail-line">
-        <span class="detail-label"><i class="fa-solid fa-id-card"></i> Username:</span>
-        <span class="detail-value">{{ user.username }}</span>
-    </div>
-    
-    <div class="detail-line">
-        <span class="detail-label"><i class="fa-solid fa-user-tag"></i> First Name:</span>
-        <span class="detail-value">{% if user.first_name %}{{ user.first_name }}{% else %}N/A{% endif %}</span> 
-    </div>
 
-    <div class="detail-line">
-        <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email:</span>
-        <span class="detail-value">{{ user.email }}</span>
-    </div>
-    
-    <div class="detail-line">
-        <span class="detail-label"><i class="fa-solid fa-calendar-alt"></i> Joined:</span>
-        <span class="detail-value">{% if user.date_joined %}{{ user.date_joined|date:"M d, Y" }}{% else %}N/A{% endif %}</span> 
-    </div>
-
-    <div class="detail-line">
-        <span class="detail-label"><i class="fa-solid fa-power-off"></i> Status:</span>
-        <span class="detail-value">
-            {% if user.is_active %}
-            <span class="status-badge badge-active">Active</span>
-            {% else %}
-            <span class="status-badge" style="background:#6c757d;">Inactive</span>
-            {% endif %}
-        </span>
-    </div>
-    
-    <div class="detail-line">
-        <span class="detail-label"><i class="fa-solid fa-users-gear"></i> Role:</span>
-        <span class="detail-value">
-            {% if user.is_superuser %}
-            <span class="status-badge badge-admin">Administrator</span>
-            {% else %}
-            <span class="status-badge badge-user">Standard User</span>
-            {% endif %}
-        </span>
-    </div>
-
-    <a href="{% url 'admin_dashboard' %}" class="button">Back to Contacts</a>
-    {% comment %} <a href="{% url 'edit_profile' %}" class="button" style="background:#5bc0de; margin-left: 10px;">Edit Profile</a> {% endcomment %}
+<!-- Navbar -->
+<div class="navbar">
+    <h1>Admin Settings</h1>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
 </div>
+
+<!-- Layout -->
+<div class="layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a>
+        <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-gear"></i> Settings</a>
+        <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
+    </div>
+
+    <div class="content">
+        <div class="profile-container">
+            <div class="profile-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+
+            <h2>Account Details</h2>
+            
+            <div class="detail-line">
+                <span class="detail-label"><i class="fa-solid fa-id-card"></i> Username:</span>
+                <span class="detail-value">{{ user.username }}</span>
+            </div>
+            
+            <div class="detail-line">
+                <span class="detail-label"><i class="fa-solid fa-user-tag"></i> First Name:</span>
+                <span class="detail-value">{% if user.first_name %}{{ user.first_name }}{% else %}N/A{% endif %}</span> 
+            </div>
+
+            <div class="detail-line">
+                <span class="detail-label"><i class="fa-solid fa-envelope"></i> Email:</span>
+                <span class="detail-value">{{ user.email }}</span>
+            </div>
+
+            <div class="detail-line">
+                <span class="detail-label"><i class="fa-solid fa-calendar-alt"></i> Joined:</span>
+                <span class="detail-value">{% if user.date_joined %}{{ user.date_joined|date:"M d, Y" }}{% else %}N/A{% endif %}</span> 
+            </div>
+
+            <div class="detail-line">
+                <span class="detail-label"><i class="fa-solid fa-power-off"></i> Status:</span>
+                <span class="detail-value">
+                    {% if user.is_active %}
+                        <span class="status-badge badge-active">Active</span>
+                    {% else %}
+                        <span class="status-badge" style="background:#6c757d;">Inactive</span>
+                    {% endif %}
+                </span>
+            </div>
+
+            <div class="detail-line">
+                <span class="detail-label"><i class="fa-solid fa-users-gear"></i> Role:</span>
+                <span class="detail-value">
+                    {% if user.is_superuser %}
+                        <span class="status-badge badge-admin">Administrator</span>
+                    {% else %}
+                        <span class="status-badge badge-user">Standard User</span>
+                    {% endif %}
+                </span>
+            </div>
+
+            <a href="{% url 'admin_dashboard' %}" class="button">Back to Contacts</a>
+        </div>
+    </div>
+</div>
+
 </body>
 </html>
