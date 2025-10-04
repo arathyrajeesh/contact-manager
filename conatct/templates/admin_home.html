@@ -4,7 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Admin Dashboard</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
+    :root {
+        --primary-blue: #007bff; 
+        --dark-blue: #0056b3;
+        --light-bg: #EAEFF4; 
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); 
+        --hover-transition: all 0.3s ease-in-out;
+    }
     body { 
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         background: #f5f7fa; 
@@ -13,30 +21,55 @@
     }
 
     header {
-        background: #4a90e2;
-        color: white;
-        padding: 20px 40px;
-        font-size: 24px;
-        font-weight: bold;
         position: relative;
+        background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
+        color: white;
+        padding: 20px 50px 20px 100px; 
+        text-align: center;
+        font-size: 28px;
+        font-weight: 600;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
     }
-
+    
+    .profile-icon {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%); 
+        right: 20px; 
+        cursor: pointer;
+        z-index: 10;
+        transition: var(--hover-transition);
+    }
+    .profile-icon:hover {
+        transform: translateY(-50%) scale(1.1);
+    }
+    .profile-icon i {
+        font-size: 28px;
+        color: white;
+    }
+    .profile-icon:hover i {
+        color: #5BC0DE;
+    }
+    
     .logout-button {
         position: absolute;
-        right: 40px;
-        top: 20px;
-        background: #d9534f;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 20px;
+        z-index: 10;
+        background: #FF5E5E;
         color: white;
-        padding: 8px 16px;
-        border-radius: 6px;
+        padding: 8px 16px; 
+        border-radius: 8px;
         text-decoration: none;
-        font-size: 14px;
+        font-size: 14px; 
+        font-weight: 500;
+        transition: var(--hover-transition);
     }
-
     .logout-button:hover {
-        background: #c9302c;
+        background: #E54545;
+        box-shadow: 0 0 15px rgba(255, 94, 94, 0.5);
     }
-
     .container { 
         max-width: 1000px; 
         margin: 30px auto; 
@@ -109,42 +142,46 @@
 </style>
 </head>
 <body>
-<header>
-    Admin Contact Manager
-    <a href="{% url 'logout' %}" class="logout-button">Logout</a>
-</header>
+    <header>
+        Admin Contact Manager
 
-<div class="container">
-    <h1>Admin Dashboard - All Contacts</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Email</th>
-                <th>Phone</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for contact in contacts %}
-            <tr>
-                <td>{{ contact.id }}</td>
-                <td>{{ contact.name }}</td>
-                <td>{{ contact.email }}</td>
-                <td>{{ contact.phone }}</td>
-                <td class="actions">
-                    <a href="{% url 'edit_admin' contact.id %}" class="edit">Edit</a>
-                    <a href="{% url 'admin_delete' contact.id %}" class="delete">Delete</a>
-                </td>
-            </tr>
-            {% empty %}
-            <tr>
-                <td colspan="5" style="text-align:center;">No contacts found.</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+        <a href="{% url 'admin_profile' %}" class="profile-icon" title="View Profile">
+            <i class="fa-solid fa-user"></i> 
+        </a>
+
+        <a href="{% url 'logout' %}" class="logout-button">Logout</a>
+    </header>
+    <div class="container">
+        <h1>Admin Dashboard - All Contacts</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for contact in contacts %}
+                <tr>
+                    <td>{{ contact.id }}</td>
+                    <td>{{ contact.name }}</td>
+                    <td>{{ contact.email }}</td>
+                    <td>{{ contact.phone }}</td>
+                    <td class="actions">
+                        <a href="{% url 'edit_admin' contact.id %}" class="edit">Edit</a>
+                        <a href="{% url 'admin_delete' contact.id %}" class="delete">Delete</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" style="text-align:center;">No contacts found.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>

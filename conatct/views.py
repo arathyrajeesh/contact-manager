@@ -158,3 +158,11 @@ def admin_delete(request, pk):
 def profile_view(request):
     user = request.user
     return render(request, 'profile.html', {'user': user})
+
+
+@login_required
+def admin_profile_view(request):
+    user = request.user
+    return render(request, 'admin_profile.html', {'user': user})
+
+
