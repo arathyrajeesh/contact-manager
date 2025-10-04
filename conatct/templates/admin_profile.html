@@ -21,7 +21,6 @@ body {
     background: var(--light-bg);
 }
 
-/* Navbar */
 .navbar {
     background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
     color: white;
@@ -50,13 +49,11 @@ body {
     background: #d9534f;
 }
 
-/* Layout */
 .layout {
     display: flex;
-    min-height: calc(100vh - 60px); /* subtract navbar height */
+    min-height: calc(100vh - 60px); 
 }
 
-/* Sidebar */
 .sidebar {
     width: 220px;
     background: #fff;
@@ -83,13 +80,11 @@ body {
     color: white;
 }
 
-/* Content */
 .content {
     flex: 1;
     padding: 25px;
 }
 
-/* Profile Card */
 .profile-container {
     background: white;
     padding: 40px;
@@ -192,7 +187,6 @@ a.button:hover {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-/* Responsive */
 @media (max-width: 768px) {
     .layout {
         flex-direction: column;
@@ -213,19 +207,16 @@ a.button:hover {
 </head>
 <body>
 
-<!-- Navbar -->
 <div class="navbar">
     <h1>Admin Settings</h1>
     <a href="{% url 'logout' %}" class="logout">Logout</a>
 </div>
 
-<!-- Layout -->
 <div class="layout">
-    <!-- Sidebar -->
     <div class="sidebar">
         <a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a>
-        <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
-        <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-gear"></i> Settings</a>
+        <a href="{% url 'admin_profile' %}" class="active"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-address-book"></i></i> Contacts</a>
         <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
     </div>
 

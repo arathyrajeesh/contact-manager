@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Settings</title>
+<title>Admin Contacts</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
     body {
@@ -63,6 +63,10 @@
         background: #007bff;
         color: white;
     }
+    .sidebar a.active {
+        background: #1f78c9;
+        color: white;
+    }
 
     .content {
         flex: 1;
@@ -74,42 +78,109 @@
         color: #333;
     }
 
-    .card {
+    .container {
         background: #fff;
-        padding: 20px;
-        border-radius: 8px;
+        padding: 20px 25px;
+        border-radius: 10px;
         box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        margin-bottom: 20px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    td {
+        color: #555;
+    }
+
+    .actions a {
+        margin-right: 8px;
+        padding: 6px 12px;
+        border-radius: 5px;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .actions a.edit {
+        background: #f0ad4e;
+    }
+
+    .actions a.edit:hover {
+        background: #ec971f;
+    }
+
+    .actions a.delete {
+        background: #d9534f;
+    }
+
+    .actions a.delete:hover {
+        background: #c9302c;
     }
 </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <h1> Admin Settings</h1>
-        <a href="{% url 'logout' %}" class="logout">Logout</a>
+<div class="navbar">
+    <h1>Admin Dashboard</h1>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
+</div>
+
+<div class="layout">
+    <div class="sidebar">
+        <a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a>
+        <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="{% url 'admin_settings' %}"class="active"><i class="fa-solid fa-address-book"></i></i> Contacts</a>
+        <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
     </div>
 
-    <div class="layout">
-        <div class="sidebar">
-            <a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a>
-            <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
-            <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-gear"></i> Settings</a>
-            <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
-        </div>
-
-        <div class="content">
-            <h2>General Settings</h2>
-            <div class="card">
-                <p>Here you can manage your admin preferences, system configurations, and other settings.</p>
-            </div>
-
-            <h2>Security Settings</h2>
-            <div class="card">
-                <p>Options for password management, two-factor authentication, and login history will go here.</p>
-            </div>
+    <div class="content">
+        <div class="container">
+            <h2>All Contacts</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contact in contacts %}
+                    <tr>
+                        <td>{{ contact.id }}</td>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td>{{ contact.phone }}</td>
+                        <td class="actions">
+                            <a href="{% url 'edit_admin' contact.id %}" class="edit">Edit</a>
+                            <a href="{% url 'admin_delete' contact.id %}" class="delete">Delete</a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="5" style="text-align:center;">No contacts found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
         </div>
     </div>
+</div>
 
 </body>
 </html>

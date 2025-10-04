@@ -3,17 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Settings</title>
+<title>Admin Dashboard</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
+    :root {
+        --primary-blue: #007bff;
+        --secondary-green: #28a745;
+        --secondary-orange: #fd7e14;
+        --secondary-red: #dc3545;
+        --light-bg: #f5f7fa;
+        --card-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    * { 
+        box-sizing: border-box; 
+    }
+
     body {
         margin: 0;
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background: #f5f7fa;
+        background: var(--light-bg);
     }
 
     .navbar {
-        background: linear-gradient(90deg, #1f78c9, #007bff);
+        background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
         color: white;
         padding: 15px 30px;
         display: flex;
@@ -21,9 +35,9 @@
         align-items: center;
     }
 
-    .navbar h1 {
-        font-size: 22px;
-        margin: 0;
+    .navbar h1 { 
+        font-size: 22px; 
+        margin: 0; 
     }
 
     .navbar .logout {
@@ -36,12 +50,12 @@
         transition: 0.3s;
     }
     .navbar .logout:hover {
-        background: #d9534f;
+        background: #d9534f; 
     }
 
-    .layout {
-        display: flex;
-    }
+    .layout { 
+        display: flex; 
+        min-height: calc(100vh - 60px); }
 
     .sidebar {
         width: 220px;
@@ -59,61 +73,110 @@
         font-weight: 500;
         transition: 0.3s;
     }
-    .sidebar a:hover {
-        background: #007bff;
-        color: white;
-    }
+    .sidebar a:hover,
     .sidebar a.active {
         background: #1f78c9;
         color: white;
     }
 
-    .content {
-        flex: 1;
-        padding: 25px;
+    .content { 
+        flex: 1; 
+        padding: 25px; 
     }
 
-    .content h2 {
-        margin-top: 0;
-        color: #333;
+    .content h2 { 
+        margin-top: 0; 
+        color: #333; 
+        margin-bottom: 20px; 
+    }
+
+    .content-cards {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
     }
 
     .card {
+        flex: 1 1 200px;
+        background: #fff;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: var(--card-shadow);
+        text-align: center;
+        font-size: 18px;
+        font-weight: 600;
+        color: #333;
+        min-width: 200px;
+        position: relative;
+    }
+
+    .card i { 
+        font-size: 36px; 
+        margin-bottom: 10px; 
+        display: block; 
+    }
+
+    .count-number { 
+        font-size: 36px; 
+        margin-top: 10px; 
+    }
+
+    .chart-container {
         background: #fff;
         padding: 20px;
         border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-        margin-bottom: 20px;
+        box-shadow: var(--card-shadow);
+        margin-top: 30px;
+    }
+
+    @media (max-width: 768px) {
+        .layout { flex-direction: column; }
+        .sidebar { width: 100%; }
+        .content-cards { justify-content: center; }
     }
 </style>
 </head>
 <body>
 
-    <div class="navbar">
-        <h1> Admin Settings</h1>
-        <a href="{% url 'logout' %}" class="logout">Logout</a>
+<div class="navbar">
+    <h1>Admin Dashboard</h1>
+    <a href="{% url 'logout' %}" class="logout">Logout</a>
+</div>
+
+<div class="layout">
+
+    <div class="sidebar">
+        <a href="{% url 'admin_dashboard' %}" class="active"><i class="fa-solid fa-home"></i> Dashboard</a>
+        <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
+        <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-address-book"></i> Contacts</a>
+        <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
     </div>
 
-    <div class="layout">
-        <div class="sidebar">
-            <a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a>
-            <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
-            <a href="{% url 'admin_settings' %}" ><i class="fa-solid fa-gear"></i> Settings</a>
-            <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
-        </div>
+    <div class="content">
+        <h2>Dashboard Summary</h2>
+        <div class="content-cards">
 
-        <div class="content">
-            <h2>General Settings</h2>
-            <div class="card">
-                <p>Here you can manage your admin preferences, system configurations, and other settings.</p>
+            <div class="card users">
+                <i class="fa-solid fa-users"></i>
+                Users
+                <div class="count-number">{{ users.count }}</div>
             </div>
 
-            <h2>Security Settings</h2>
-            <div class="card">
-                <p>Options for password management, two-factor authentication, and login history will go here.</p>
+            <div class="card users">
+                <i class="fa-solid fa-address-book"></i>
+                Contacts
+                <div class="count-number">{{ contacts.count }}</div>
             </div>
+            <div class="card users">
+                <i class="fa-solid fa-users"></i>
+                Active User
+                <div class="count-number">{{ active_users_count }}</div>
+            </div>
+
         </div>
     </div>
+</div>
+
 
 </body>
 </html>

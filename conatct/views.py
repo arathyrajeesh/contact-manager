@@ -124,8 +124,18 @@ def delete_contact(request, pk):
 def admin_dashboard(request):
     if not request.user.is_superuser:
         return redirect('contact_list')
+
+    users = User.objects.all()
     contacts = Contact.objects.all()
-    return render(request, 'admin_home.html', {'contacts': contacts})
+    active_users = User.objects.filter(is_active=True)  
+
+    context = {
+        'users': users,
+        'contacts': contacts,
+        'active_users': active_users,
+        'active_users_count': active_users.count(),
+    }
+    return render(request, 'admin_home.html', context)
 
 
 @login_required
@@ -167,9 +177,12 @@ def admin_profile_view(request):
 
 @login_required
 def admin_settings(request):
-    return render(request, 'admin_settings.html')
+    
+    contacts = Contact.objects.all()
+    return render(request, 'admin_settings.html',{'contacts': contacts})
 
 
 @login_required
 def manage_user(request):
-    return render(request, 'manage user.html')
+    users = User.objects.all()
+    return render(request, 'manage user.html',{'users': users})

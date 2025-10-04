@@ -6,154 +6,151 @@
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 <style>
-:root {
-    --primary-blue: #007bff; 
-    --dark-blue: #0056b3;
-    --light-bg: #f5f7fa; 
-    --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    --hover-transition: all 0.3s ease-in-out;
-}
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
+    :root {
+        --primary-blue: #007bff; 
+        --dark-blue: #0056b3;
+        --light-bg: #f5f7fa; 
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        --hover-transition: all 0.3s ease-in-out;
+    }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: var(--light-bg);
-}
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
 
-/* Navbar */
-.navbar {
-    background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
-    color: white;
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: var(--light-bg);
+    }
 
-.navbar h1 {
-    font-size: 22px;
-}
+    .navbar {
+        background: linear-gradient(90deg, #1f78c9, var(--primary-blue));
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
-.navbar .logout {
-    background: #FF5E5E;
-    padding: 8px 14px;
-    border-radius: 6px;
-    text-decoration: none;
-    color: white;
-    font-size: 14px;
-    transition: 0.3s;
-}
+    .navbar h1 {
+        font-size: 22px;
+    }
 
-.navbar .logout:hover {
-    background: #d9534f;
-}
+    .navbar .logout {
+        background: #FF5E5E;
+        padding: 8px 14px;
+        border-radius: 6px;
+        text-decoration: none;
+        color: white;
+        font-size: 14px;
+        transition: 0.3s;
+    }
 
-/* Layout */
-.layout {
-    display: flex;
-    min-height: calc(100vh - 60px); /* subtract navbar height */
-}
+    .navbar .logout:hover {
+        background: #d9534f;
+    }
 
-/* Sidebar */
-.sidebar {
-    width: 220px;
-    background: #fff;
-    box-shadow: 2px 0 8px rgba(0,0,0,0.1);
-    padding-top: 20px;
-}
-
-.sidebar a {
-    display: block;
-    padding: 12px 20px;
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    transition: 0.3s;
-}
-
-.sidebar a:hover,
-.sidebar a.active {
-    background: #1f78c9;
-    color: white;
-}
-
-/* Main Content */
-.content {
-    flex: 1;
-    padding: 25px;
-}
-
-.content h1 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #333;
-}
-
-.container {
-    background: #fff;
-    padding: 20px 25px;
-    border-radius: 10px;
-    box-shadow: var(--card-shadow);
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 10px;
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 12px;
-    text-align: left;
-}
-
-th {
-    background-color: #f0f0f0;
-}
-
-td {
-    color: #555;
-}
-
-.actions a {
-    margin-right: 8px;
-    padding: 6px 12px;
-    border-radius: 5px;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-}
-
-.actions a.edit {
-    background: #f0ad4e;
-}
-
-.actions a.edit:hover {
-    background: #ec971f;
-}
-
-.actions a.delete {
-    background: #d9534f;
-}
-
-.actions a.delete:hover {
-    background: #c9302c;
-}
-
-@media (max-width: 768px) {
     .layout {
-        flex-direction: column;
+        display: flex;
+        min-height: calc(100vh - 60px); 
     }
+
     .sidebar {
-        width: 100%;
+        width: 220px;
+        background: #fff;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        padding-top: 20px;
     }
-}
+
+    .sidebar a {
+        display: block;
+        padding: 12px 20px;
+        text-decoration: none;
+        color: #333;
+        font-weight: 500;
+        transition: 0.3s;
+    }
+
+    .sidebar a:hover,
+    .sidebar a.active {
+        background: #1f78c9;
+        color: white;
+    }
+
+    .content {
+        flex: 1;
+        padding: 25px;
+    }
+
+    .content h1 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    .container {
+        background: #fff;
+        padding: 20px 25px;
+        border-radius: 10px;
+        box-shadow: var(--card-shadow);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+    }
+
+    th, td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #f0f0f0;
+    }
+
+    td {
+        color: #555;
+    }
+
+    .actions a {
+        margin-right: 8px;
+        padding: 6px 12px;
+        border-radius: 5px;
+        color: white;
+        text-decoration: none;
+        font-size: 14px;
+    }
+
+    .actions a.edit {
+        background: #f0ad4e;
+    }
+
+    .actions a.edit:hover {
+        background: #ec971f;
+    }
+
+    .actions a.delete {
+        background: #d9534f;
+    }
+
+    .actions a.delete:hover {
+        background: #c9302c;
+    }
+
+    @media (max-width: 768px) {
+        .layout {
+            flex-direction: column;
+        }
+        .sidebar {
+            width: 100%;
+        }
+    }
 </style>
 </head>
 <body>
@@ -168,45 +165,60 @@ td {
     <div class="sidebar">
         <a href="{% url 'admin_dashboard' %}"><i class="fa-solid fa-home"></i> Dashboard</a>
         <a href="{% url 'admin_profile' %}"><i class="fa-solid fa-user"></i> Profile</a>
-        <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-gear"></i> Settings</a>
-        <a href="{% url 'manager_user' %}"><i class="fa-solid fa-users"></i> Manage Users</a>
+        <a href="{% url 'admin_settings' %}"><i class="fa-solid fa-address-book"></i></i> Contacts</a>
+        <a href="{% url 'manager_user' %}"class="active"><i class="fa-solid fa-users"></i> Manage Users</a>
     </div>
 
     <div class="content">
         <div class="container">
-            <h1>All Contacts</h1>
+            <h1>All Users</h1>
             <table>
                 <thead>
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
+                        <th>Username</th>
+                        <th>First Name</th>
                         <th>Email</th>
-                        <th>Phone</th>
+                        <th>Role</th>
+                        <th>Status</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for contact in contacts %}
+                    {% for user in users %}
                     <tr>
-                        <td>{{ contact.id }}</td>
-                        <td>{{ contact.name }}</td>
-                        <td>{{ contact.email }}</td>
-                        <td>{{ contact.phone }}</td>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{% if user.first_name %}{{ user.first_name }}{% else %}N/A{% endif %}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.is_superuser %}
+                            Administrator
+                            {% else %}
+                            Standard User
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if user.is_active %}
+                            Active
+                            {% else %}
+                            Inactive
+                            {% endif %}
+                        </td>
                         <td class="actions">
-                            <a href="{% url 'edit_admin' contact.id %}" class="edit">Edit</a>
-                            <a href="{% url 'admin_delete' contact.id %}" class="delete">Delete</a>
+                            <a href="{% url 'edit_admin' user.id %}" class="edit">Edit</a>
+                            <a href="{% url 'admin_delete' user.id %}" class="delete">Delete</a>
                         </td>
                     </tr>
                     {% empty %}
                     <tr>
-                        <td colspan="5" style="text-align:center;">No contacts found.</td>
+                        <td colspan="7" style="text-align:center;">No users found.</td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>
 
 </body>
