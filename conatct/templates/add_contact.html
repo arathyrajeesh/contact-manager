@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>{% if form.instance.pk %}Edit Contact{% else %}Add Contact{% endif %}</title>
+<title>Edit Contact</title>
 <style>
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -74,7 +74,7 @@
         {{ form.as_p }}
         <button type="submit">Save</button>
     </form>
-    <a href="{% url 'contact_list' %}" class="back">← Back to Contacts</a>
+    <a href="{% url 'contact_list' %}" class="back"> Back to Contacts</a>
 </div>
 </body>
 </html>
