@@ -9,15 +9,15 @@
 <style>
 :root {
     --primary-blue: #007bff;
-    --dark-blue: #004d99; /* Slightly darker for better contrast */
-    --light-bg: #F4F7FB; /* Very light, soft blue-gray */
-    --card-shadow: 0 15px 40px rgba(0,0,0,0.12); /* Deeper, softer shadow */
-    --inner-shadow: inset 0 1px 3px rgba(0,0,0,0.05); /* Subtle inner shadow for inputs */
-    --accent-green: #10a88c; /* Slightly muted, elegant green */
-    --hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+    --dark-blue: #004d99; 
+    --light-bg: #F4F7FB; 
+    --card-shadow: 0 15px 40px rgba(0,0,0,0.12); 
+    --inner-shadow: inset 0 1px 3px rgba(0,0,0,0.05); 
+    --accent-green: #10a88c;
+    --hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
 }
 body {
-    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Using Poppins */
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
     background: var(--light-bg);
     margin: 0;
     display: flex;
@@ -28,46 +28,59 @@ body {
 .profile-container {
     background: white;
     padding: 40px;
-    border-radius: 16px; /* Slightly larger border-radius */
+    border-radius: 16px;
     box-shadow: var(--card-shadow);
     width: 100%;
-    max-width: 480px; /* Slightly wider */
+    max-width: 480px; 
     transition: var(--hover-transition);
-    border: 1px solid rgba(0,0,0,0.05); /* Subtle border */
+    border: 1px solid rgba(0,0,0,0.05); 
 }
-.profile-container:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.15); } /* Enhanced hover effect */
-h2 { text-align: center; color: var(--dark-blue); margin-bottom: 40px; font-weight: 700; font-size: 1.8rem; letter-spacing: -0.5px; }
-.form-group { margin-bottom: 25px; text-align: left; }
+.profile-container:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+}
+h2 { 
+    text-align: center; 
+    color: var(--dark-blue); 
+    margin-bottom: 40px; 
+    font-weight: 700; 
+    font-size: 1.8rem; 
+    letter-spacing: -0.5px; 
+}
+.form-group {
+    margin-bottom: 25px; 
+    text-align: left; 
+}
 label { 
     font-weight: 600; 
     margin-bottom: 8px; 
     display: block; 
-    color: #333; /* Darker text */
-    font-size: 14px; /* Slightly smaller and bolder */
-    display: flex; /* Align icon and text */
+    color: #333; 
+    font-size: 14px; 
+    display: flex; 
     align-items: center;
 }
-label i { margin-right: 8px; color: var(--accent-green); } /* Style the icon */
+label i { margin-right: 8px; color: var(--accent-green); } 
 .input-field { 
     width: 100%; 
-    padding: 14px 18px; /* Slightly more vertical padding */
+    padding: 14px 18px; 
     border: 1px solid #e0e0e0; 
-    border-radius: 8px; /* Slightly larger border-radius */
+    border-radius: 8px; 
     font-size: 16px; 
     color: #333; 
     box-sizing: border-box; 
     transition: var(--hover-transition);
-    background-color: #fcfcfc; /* Very subtle background */
+    background-color: #fcfcfc; 
     box-shadow: var(--inner-shadow);
 }
 .input-field:focus { 
     border-color: var(--primary-blue); 
     outline: none; 
-    box-shadow: 0 0 0 4px rgba(0,123,255,0.15); /* Softer focus ring */
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.15); 
     background-color: white; 
 }
 .input-field[readonly] {
-    background-color: #f0f0f0; /* Clearer distinction for read-only */
+    background-color: #f0f0f0; 
     cursor: not-allowed;
     color: #6c757d;
     font-style: italic;
@@ -76,9 +89,9 @@ label i { margin-right: 8px; color: var(--accent-green); } /* Style the icon */
 .button-group { display: flex; justify-content: space-between; margin-top: 40px; gap: 15px; }
 .save-button, .back-button { 
     flex: 1; 
-    padding: 14px 25px; /* More padding */
+    padding: 14px 25px; 
     border-radius: 10px; 
-    font-weight: 700; /* Bolder text */
+    font-weight: 700; 
     cursor: pointer; 
     border: none; 
     font-size: 16px; 
@@ -93,8 +106,8 @@ label i { margin-right: 8px; color: var(--accent-green); } /* Style the icon */
     color: white; 
 }
 .save-button:hover { 
-    background: #0d8a73; /* Darker green on hover */
-    box-shadow: 0 6px 15px rgba(16, 168, 140, 0.4); /* Green shadow on hover */
+    background: #0d8a73; 
+    box-shadow: 0 6px 15px rgba(16, 168, 140, 0.4); 
     transform: translateY(-2px);
 }
 .back-button { 
@@ -110,7 +123,9 @@ label i { margin-right: 8px; color: var(--accent-green); } /* Style the icon */
     box-shadow: 0 6px 15px rgba(108, 117, 125, 0.4);
     transform: translateY(-2px);
 }
-.save-button i, .back-button i { margin-right: 8px; }
+.save-button i, .back-button i {
+    margin-right: 8px; 
+}
 
 .message { 
     color: var(--accent-green); 
@@ -118,12 +133,19 @@ label i { margin-right: 8px; color: var(--accent-green); } /* Style the icon */
     font-weight: 700; 
     text-align: center;
     padding: 10px;
-    background-color: #e6fffb; /* Light green background */
+    background-color: #e6fffb; 
     border-radius: 8px;
     border-left: 5px solid var(--accent-green);
 }
-small { font-size: 13px; margin-top: 5px; display: block;}
-small[style*="red"] { color: #dc3545 !important; font-weight: 500; }
+small { 
+    font-size: 13px; 
+    margin-top: 5px; 
+    display: block;
+}
+small[style*="red"] { 
+    color: #dc3545 !important; 
+    font-weight: 500; 
+}
 
 @media (max-width: 500px) { 
     .profile-container { 
@@ -162,17 +184,12 @@ small[style*="red"] { color: #dc3545 !important; font-weight: 500; }
 
         <div class="form-group">
             <label for="id_first_name"><i class="fa-solid fa-signature"></i> First Name</label> 
-            <input type="text" id="id_first_name" name="first_name" class="input-field" value="Jane">
-            {% comment %} 
-            {% if form.first_name.errors %}
-                <small style="color:red;">{{ form.first_name.errors }}</small>
-            {% endif %}
-            {% endcomment %}
+            <input type="text" id="id_first_name" name="first_name" class="input-field" value="{{user.username}}">
         </div>
 
         <div class="form-group">
             <label for="id_email"><i class="fa-solid fa-envelope"></i> Email Address</label> 
-            <input type="email" id="id_email" name="email" class="input-field" value="jane.doe@example.com">
+            <input type="email" id="id_email" name="email" class="input-field" value="{{user.email}}">
             <small style="color:red;">Please enter a valid email format.</small>
         </div>
 

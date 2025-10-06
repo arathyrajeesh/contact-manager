@@ -28,6 +28,7 @@ def edit_profile(request):
     
     return render(request, 'edit_profile.html', {'form': form, 'user': user})
 
+
 def register_view(request):
     if request.method == "POST":
         username = request.POST['username']
@@ -118,8 +119,6 @@ def delete_contact(request, pk):
     return render(request, 'contact_confirm_delete.html', {'contact': contact})
 
 
-
-
 @login_required
 def admin_dashboard(request):
     if not request.user.is_superuser:
@@ -186,3 +185,5 @@ def admin_settings(request):
 def manage_user(request):
     users = User.objects.all()
     return render(request, 'manage user.html',{'users': users})
+
+
