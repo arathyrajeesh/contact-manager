@@ -7,6 +7,8 @@ from .forms import ContactForm
 from .models import Contact
 from .forms import CustomUserChangeForm
 
+def main_view(request):
+    return render(request,'Hero.html')
 
 @login_required
 def profile_view(request):
