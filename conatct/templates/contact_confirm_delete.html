@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Contact</title>
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f7fa;
+        margin: 0;
+        padding: 0;
+    }
+    header {
+        background: #d9534f;
+        color: white;
+        padding: 20px;
+        text-align: center;
+        font-size: 24px;
+        font-weight: bold;
+    }
+    .container {
+        width: 90%;
+        max-width: 500px;
+        margin: 40px auto;
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        text-align: center;
+    }
+    button, a {
+        display: inline-block;
+        padding: 10px 20px;
+        margin: 10px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 16px;
+        cursor: pointer;
+        border: none;
+    }
+    button {
+        background: #d9534f;
+        color: white;
+    }
+    button:hover {
+        background: #c9302c;
+    }
+    a {
+        background: #5bc0de;
+        color: white;
+    }
+    a:hover {
+        background: #31b0d5;
+    }
+</style>
+</head>
+<body>
+<header>Delete Contact</header>
+
+<div class="container">
+    <p>Are you sure you want to delete <strong>{{ contact.name }}</strong>?</p>
+    <form method="post" style="display:inline;">
+        {% csrf_token %}
+        <button type="submit">Yes, Delete</button>
+    </form>
+    <a href="{% url 'contact_list' %}">Cancel</a>
+</div>
+</body>
+</html>

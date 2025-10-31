@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Edit Profile</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<style>
+:root {
+    --primary-blue: #007bff;
+    --dark-blue: #004d99; 
+    --light-bg: #F4F7FB; 
+    --card-shadow: 0 15px 40px rgba(0,0,0,0.12); 
+    --inner-shadow: inset 0 1px 3px rgba(0,0,0,0.05); 
+    --accent-green: #10a88c;
+    --hover-transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+}
+body {
+    font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    background: var(--light-bg);
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+.profile-container {
+    background: white;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: var(--card-shadow);
+    width: 100%;
+    max-width: 480px; 
+    transition: var(--hover-transition);
+    border: 1px solid rgba(0,0,0,0.05); 
+}
+.profile-container:hover { 
+    transform: translateY(-5px); 
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15); 
+}
+h2 { 
+    text-align: center; 
+    color: var(--dark-blue); 
+    margin-bottom: 40px; 
+    font-weight: 700; 
+    font-size: 1.8rem; 
+    letter-spacing: -0.5px; 
+}
+.form-group {
+    margin-bottom: 25px; 
+    text-align: left; 
+}
+label { 
+    font-weight: 600; 
+    margin-bottom: 8px; 
+    display: block; 
+    color: #333; 
+    font-size: 14px; 
+    display: flex; 
+    align-items: center;
+}
+label i { 
+    margin-right: 8px; 
+    color: var(--accent-green); 
+} 
+.input-field { 
+    width: 100%; 
+    padding: 14px 18px; 
+    border: 1px solid #e0e0e0; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    color: #333; 
+    box-sizing: border-box; 
+    transition: var(--hover-transition);
+    background-color: #fcfcfc; 
+    box-shadow: var(--inner-shadow);
+}
+.input-field:focus { 
+    border-color: var(--primary-blue); 
+    outline: none; 
+    box-shadow: 0 0 0 4px rgba(0,123,255,0.15); 
+    background-color: white; 
+}
+.input-field[readonly] {
+    background-color: #f0f0f0; 
+    cursor: not-allowed;
+    color: #6c757d;
+    font-style: italic;
+    box-shadow: none;
+}
+.button-group { 
+    display: flex; 
+    justify-content: space-between; 
+    margin-top: 40px; 
+    gap: 15px; 
+}
+.save-button, .back-button { 
+    flex: 1; 
+    padding: 14px 25px; 
+    border-radius: 10px; 
+    font-weight: 700; 
+    cursor: pointer; 
+    border: none; 
+    font-size: 16px; 
+    text-decoration: none; 
+    transition: var(--hover-transition);
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    text-transform: uppercase;
+}
+.save-button { 
+    background: var(--accent-green); 
+    color: white; 
+}
+.save-button:hover { 
+    background: #0d8a73; 
+    box-shadow: 0 6px 15px rgba(16, 168, 140, 0.4); 
+    transform: translateY(-2px);
+}
+.back-button { 
+    background: #6c757d; 
+    color: white; 
+    text-align: center; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center;
+}
+.back-button:hover { 
+    background: #5a6268; 
+    box-shadow: 0 6px 15px rgba(108, 117, 125, 0.4);
+    transform: translateY(-2px);
+}
+.save-button i, .back-button i {
+    margin-right: 8px; 
+}
+
+.message { 
+    color: var(--accent-green); 
+    margin-bottom: 20px; 
+    font-weight: 700; 
+    text-align: center;
+    padding: 10px;
+    background-color: #e6fffb; 
+    border-radius: 8px;
+    border-left: 5px solid var(--accent-green);
+}
+small { 
+    font-size: 13px; 
+    margin-top: 5px; 
+    display: block;
+}
+small[style*="red"] { 
+    color: #dc3545 !important; 
+    font-weight: 500; 
+}
+
+@media (max-width: 500px) { 
+    .profile-container { 
+        padding: 30px 20px; 
+        max-width: 90%; 
+    } 
+    .button-group { 
+        flex-direction: column; 
+    } 
+    .save-button, .back-button { 
+        padding: 12px 20px; 
+    } 
+}
+</style>
+</head>
+<body>
+<div class="profile-container">
+    <h2>Edit Profile</h2>
+    
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message">{{ message }}</div>
+        {% endfor %}
+    {% else %}
+        <div class="message" style="display:none;">Profile updated successfully!</div>
+    {% endif %}
+    
+    <form method="POST" action="{% url 'edit_profile' %}">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="username"><i class="fa-solid fa-user-tag"></i> Username</label>
+            <input type="text" class="input-field" value="current_user_name" readonly>
+            <small style="color:#6c757d;">(Username cannot be changed)</small>
+        </div>
+
+        <div class="form-group">
+            <label for="id_first_name"><i class="fa-solid fa-signature"></i> First Name</label> 
+            <input type="text" id="id_first_name" name="first_name" class="input-field" value="{{user.username}}">
+        </div>
+
+        <div class="form-group">
+            <label for="id_email"><i class="fa-solid fa-envelope"></i> Email Address</label> 
+            <input type="email" id="id_email" name="email" class="input-field" value="{{user.email}}">
+            <small style="color:red;">Please enter a valid email format.</small>
+        </div>
+
+        <div class="button-group">
+            <a href="{% url 'profile' %}" class="back-button"><i class="fa-solid fa-arrow-left"></i> Back</a>
+            <button type="submit" class="save-button"><i class="fa-solid fa-floppy-disk"></i> Save Changes</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
